@@ -1,20 +1,20 @@
 package com.medilabo.microservice_notes.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
+@Document(collection = "notes")
 public class Note {
 
     @Id
     private String id;
-    private String patientId;
+    private int patientId;
     private String patient;
     private String note;
 }

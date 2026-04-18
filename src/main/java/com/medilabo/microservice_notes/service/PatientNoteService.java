@@ -1,15 +1,12 @@
 package com.medilabo.microservice_notes.service;
 
-
 import com.medilabo.microservice_notes.model.Note;
 import com.medilabo.microservice_notes.repository.PatientNoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class PatientNoteService {
 
     @Autowired
@@ -19,7 +16,7 @@ public class PatientNoteService {
         return noteRepository.findAll();
     }
 
-    public List<Note> getNotesByPatientId(String id) {
+    public List<Note> getNotesByPatientId(int id) {
         return noteRepository.findByPatientId(id);
     }
 
