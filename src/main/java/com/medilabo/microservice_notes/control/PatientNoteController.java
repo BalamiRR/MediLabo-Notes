@@ -1,7 +1,9 @@
 package com.medilabo.microservice_notes.control;
 
 import com.medilabo.microservice_notes.model.Note;
+import com.medilabo.microservice_notes.repository.PatientNoteRepository;
 import com.medilabo.microservice_notes.service.PatientNoteService;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
