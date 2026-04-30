@@ -1,9 +1,7 @@
 package com.medilabo.microservice_notes.control;
 
-import com.medilabo.microservice_notes.model.Note;
-import com.medilabo.microservice_notes.repository.PatientNoteRepository;
+import com.medilabo.microservice_notes.model.Notes;
 import com.medilabo.microservice_notes.service.PatientNoteService;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,24 +19,24 @@ public class PatientNoteController {
     private PatientNoteService noteService;
 
     @GetMapping
-    public ResponseEntity<List<Note>> getAllNotes(){
+    public ResponseEntity<List<Notes>> getAllNotes(){
         log.info("GET /api/notes/ - Getting all notes");
-        List<Note> notes = noteService.getAllNotes();
+        List<Notes> notes = noteService.getAllNotes();
         return ResponseEntity.ok(notes);
     }
 
     @GetMapping("/{patientId}")
-    public ResponseEntity<List<Note>> getNotesByPatientId(@PathVariable int patientId){
+    public ResponseEntity<List<Notes>> getNotesByPatientId(@PathVariable Integer patientId){
         log.info("Getting notes for patientId: {}", patientId);
-        List<Note> notes = noteService.getNotesByPatientId(patientId);
+        List<Notes> notes = noteService.getNotesByPatientId(patientId);
         return ResponseEntity.ok(notes);
     }
 
     @PostMapping
-    public ResponseEntity<Note> createNote(@RequestBody Note note) {
+    public ResponseEntity<Notes> createNote(@RequestBody Notes note) {
         log.info("POST /api/notes - Creating a new note: {}", note);
         try {
-            Note createdNote = noteService.createNote(note);
+            Notes createdNote = noteService.createNote(note);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdNote);
         } catch (Exception e) {
             log.error("Error creating note: {}", e.getMessage());

@@ -11,11 +11,14 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Note {
+public class Notes {
 
     @Id
     private String id;
     private int patientId;
     private String patient;
     private String note;
+
+    @Field("createdAt")
+    private java.util.Date createdAt;
 }
