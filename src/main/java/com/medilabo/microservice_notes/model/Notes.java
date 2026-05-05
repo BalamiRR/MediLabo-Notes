@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "notes")
 @Data
@@ -19,6 +18,4 @@ public class Notes {
     private String patient;
     private String note;
 
-    @Field("createdAt")
-    private java.util.Date createdAt;
 }
