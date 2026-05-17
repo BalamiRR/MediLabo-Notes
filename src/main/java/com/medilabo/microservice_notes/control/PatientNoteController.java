@@ -19,14 +19,14 @@ public class PatientNoteController {
     private PatientNoteService noteService;
 
     @GetMapping
-    public ResponseEntity<List<Notes>> getAllNotes(){
+    public ResponseEntity<List<Notes>> getAllNotes() {
         log.info("GET /api/notes/ - Getting all notes");
         List<Notes> notes = noteService.getAllNotes();
         return ResponseEntity.ok(notes);
     }
 
     @GetMapping("/{patientId}")
-    public ResponseEntity<List<Notes>> getNotesByPatientId(@PathVariable Integer patientId){
+    public ResponseEntity<List<Notes>> getNotesByPatientId(@PathVariable Integer patientId) {
         log.info("Getting notes for patientId: {}", patientId);
         List<Notes> notes = noteService.getNotesByPatientId(patientId);
         return ResponseEntity.ok(notes);
@@ -42,6 +42,21 @@ public class PatientNoteController {
             log.error("Error creating note: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Notes> updateNote(@PathVariable String id, @RequestBody Notes note) {
+        log.info("PUT /api/notes/{} - Updating note", id);
+        return noteService.updateNote(id, note)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteNote(@PathVariable String id) {
+        log.info("DELETE /api/notes/{} - Deleting note", id);
+        noteService.deleteNote(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
